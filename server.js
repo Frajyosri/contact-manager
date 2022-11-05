@@ -61,7 +61,7 @@ app.delete("/contact/:id",(req,res)=>{
     const deletecontact=`delete  from contact where ${id}=id`;
     db.query(deletecontact,(err,resultat)=>{
         if (!err) {
-            res.send(resultat);
+            res.send("contact deleted with succes");
         }else{
             console.log(err)
         }
@@ -72,24 +72,24 @@ app.delete("/contact/:id",(req,res)=>{
 app.put("/update/:id",(req,res)=>{
     const id = req.params.id;
     const {name,phone, email, cover, groupe}=req.body;
-    const updateContact=`UPDATE contact SET name=?,phone=? ,email=? , cover=? group=? WHERE  id = ? `;
-    db.query(updateContact,[name,phone,email,cover,groupe,id],(err,resultat)=>{
+    const updateContact=`UPDATE contact SET name=?,phone=? ,email=? , cover=?,groupe=? WHERE  id = ${id}`;
+    db.query(updateContact,[name,phone,email,cover,groupe],(err,resultat)=>{
         if (!err) {
-            res.send({"msg":"contact updated with succes "},resultat)
+            res.send("contact updated with succes")
         }else{
-            res.send("contact not found ")
+            res.send(err)
         }
     })
 })
 //add contact 
 app.post("/add",(req,res)=>{
     const {name,phone, email, cover, groupe}=req.body;
-    const addcontact="insert into contact (name,phone,email,cover,group) value(?,?,?,?,?)";
+    const addcontact="insert into contact (name,phone,email,cover,groupe) values (?,?,?,?,?)";
     db.query(addcontact,[name,phone,email,cover,groupe],(err,resultat)=>{
         if (!err) {
-            res.send({"msg":"contact added with succes "},resultat)
+            res.send("contact added with succes")
         }else{
-           console.log(err)
+           res.send(err)
         }
     })
 })
