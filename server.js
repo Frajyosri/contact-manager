@@ -19,6 +19,68 @@ const db= sql.createPool({
     database:"contact_db"
 })
 
+//login 
+app.get("/auth/login",(req,res)=>{
+    const {email,password}=req.body;
+    const selectUser="select * from user where email=? and password=?";
+    db.query(selectUser,[email,password],(err,reselt)=>{
+        if(reselt){
+            res.send("welcome you are Connected ");
+        }else{
+            res.send("Invalid email or password");
+        }
+        if(err){
+            console.log(err)
+        }
+    })
+})
+
+//register 
+app.post("/auth/register",(req,res)=>{
+    const {email,password}=req.body;
+    const selectUser="select * from user where email=? and password=?";
+    const insertUser="insert into user(email,password) value(?,?)";
+
+    db.query(insertUser,[email,password],(err,resltatInsert)=>{
+            if(resltatInsert){
+                res.send("user registred ");
+            }
+        })
+    db.query(selectUser,[email,password],(err,resltat)=>{
+        if(resltat){
+            res.send("email alredy used ")
+        }
+        if(err){
+            console.log(err)
+        }
+        
+    })
+})
+//get all Groupe 
+app.get("/getallGroupe",(req,res)=>{
+    const getall="select * from groupe";
+    db.query(getall,(err,resultat)=>{
+        if (!err) {
+            res.send(resultat);
+        }else{
+            console.log(err)
+        }
+    })
+})
+
+//delete Groupe
+app.delete("/groupe/:id",(req,res)=>{
+    const id =req.params.id;
+    const deleteGroupe=`delete  from groupe where ${id}=id`;
+    db.query(deleteGroupe,(err,resultat)=>{
+        if (!err) {
+            res.send("Groupe deleted with succes ");
+        }else{
+            console.log(err)
+        }
+    })
+})
+
 //get all contact 
 app.get("/getall",(req,res)=>{
     const getall="select * from contact";
@@ -46,8 +108,8 @@ app.get("/getall/:id",(req,res)=>{
 //get contact by name 
 app.get("/getall",(req,res)=>{
     const name =req.query.name;
-    const getbyname=`select * from contact where ${name}=name`;
-    db.query(getbyname,(err,resultat)=>{
+    const getbyname=`SELECT * FROM contact WHERE name LIKE ?`;
+    db.query(getbyname,name,(err,resultat)=>{
         if (!err) {
             res.send(resultat);
         }else{
@@ -60,8 +122,8 @@ app.delete("/contact/:id",(req,res)=>{
     const id =req.params.id;
     const deletecontact=`delete  from contact where ${id}=id`;
     db.query(deletecontact,(err,resultat)=>{
-        if (!err) {
-            res.send(resultat);
+        if (resultat) {
+            res.send("Contact deleted with succes ");
         }else{
             console.log(err)
         }
@@ -72,10 +134,10 @@ app.delete("/contact/:id",(req,res)=>{
 app.put("/update/:id",(req,res)=>{
     const id = req.params.id;
     const {name,phone, email, cover, groupe}=req.body;
-    const updateContact=`UPDATE contact SET name=?,phone=? ,email=? , cover=? group=? WHERE  id = ? `;
+    const updateContact=`UPDATE contact SET name=?,phone=? ,email=? , cover=? groupe=? WHERE  id = ? `;
     db.query(updateContact,[name,phone,email,cover,groupe,id],(err,resultat)=>{
         if (!err) {
-            res.send({"msg":"contact updated with succes "},resultat)
+            res.send("contact updated with succes ")
         }else{
             res.send("contact not found ")
         }
@@ -84,10 +146,10 @@ app.put("/update/:id",(req,res)=>{
 //add contact 
 app.post("/add",(req,res)=>{
     const {name,phone, email, cover, groupe}=req.body;
-    const addcontact="insert into contact (name,phone,email,cover,group) value(?,?,?,?,?)";
+    const addcontact="INSERT INTO `contact` (`name`, `phone`, `email`, `cover`, `groupe`) VALUES ( ?, ?, ?, ?, ?);";
     db.query(addcontact,[name,phone,email,cover,groupe],(err,resultat)=>{
-        if (!err) {
-            res.send({"msg":"contact added with succes "},resultat)
+        if (resultat) {
+            res.send("contact added with succes ")
         }else{
            console.log(err)
         }
