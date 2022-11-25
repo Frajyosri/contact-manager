@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Manager</title>
+  <link href="/dist/output.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="bg-indigo-600 flex justify-between h-20">
+
+      <div class="container mx-auto flex items-center justify-between ">
+        <div class="pt-2">
+          <a routerLink="/home" class="font-semibold ">Contact Manager </a>
+        </div>
+        <div class="flex space-x-6">
+          <input type="text" name="search" class=" rounded-md " placeholder="search contact here .... ">
+          <button type="submit" class="  px-2 py-2  rounded-r-md hover:bg-white">Search</button>
+          <button class="px-2 py-2 bg-white rounded hover:rounded-md" (click)="logout()">Log Out</button>
+        </div>
+      </div>
+  </nav>  
+</body>
+</html>
+
+  
