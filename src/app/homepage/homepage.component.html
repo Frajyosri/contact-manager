@@ -1,5 +1,35 @@
 <app-navbar></app-navbar>
 <section class="bg-indigo-400 h-screen">
 <a class="px-2 py-2 bg-white rounded cursor-pointer mx-7" routerLink="/add">Add new Contact </a>
+<figure class="flex justify-start rounded-xl p-8 md:p-0 m-4" *ngFor="let contacts of Contact">
+    <img class="w-24 h-24 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto " src="/assets/user-png-icon.png" alt="" width="384" height="512">
+    <div class="pt-6 md:p-8 text-center  space-y-4 bg-slate-100 rounded-md">
+      <blockquote>
+        <p class="text-lg font-medium">
+            {{contacts.description}}
+        </p>
+        <p class="text-lg font-medium">
+         Email :  {{contacts.email}}
+      </p>
+      <p class="text-lg font-medium">
+        phone  : +216  {{contacts.phone}}
+     </p>
+      </blockquote>
+      <figcaption class="font-medium">
+        <div class="text-indigo-500">
+          {{contacts.name}}
+        </div>
+        <div class="text-slate-700 ">
+            {{contacts.job}}
+        </div>
+        <div class="w-full h-auto p-3 flex justify-around">
+            <a routerLink="/edit/{{contacts.id}}" class=" px-3 py-2 bg-indigo-500 w-28 text-center  rounded-r-md hover:bg-indigo-700">edit</a>
+           <button (click)="delete(contacts.id)">delete</button> 
+        </div>
+      </figcaption>
+    </div>
+  </figure>
+
+
 </section>
 <app-footer></app-footer>

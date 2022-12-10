@@ -1,1 +1,36 @@
-<p>editcontact works!</p>
+<app-navbar></app-navbar>
+<section  class="bg-indigo-400 h-screen ">
+<a routerLink="/home"><button  class=" px-3 py-2 bg-gray-300 w-28 text-center  rounded-md hover:bg-indigo-700 mt-1" >Back</button></a> 
+<form (ngSubmit)=" Editecontact()"  >
+    <div class="flex flex-col w-2/4 items-center mt-5">
+    <input type="text" name="name"  placeholder="{{newContact.name}}"
+    [value]="newContact.name" [(ngModel)]="Contact.name" 
+    class="w-48 rounded-md p-2 mt-1" >
+    <input type="text" name="phone"  placeholder="entrez votre phone "
+     [value]="newContact.phone"
+      [(ngModel)]="Contact.phone"
+      class="w-48 rounded-md p-2 mt-1" >
+    <input type="email"  name="email"  placeholder="entrez votre mail "
+     [value]="newContact.email" 
+     [(ngModel)]="Contact.email" 
+     class="w-48 rounded-md p-2 mt-1"  >
+    <input type="text"  name="description" placeholder="entrez une description de ce personne "
+     [value]="newContact.description"
+      [(ngModel)]="Contact.description" class="w-48 rounded-md p-2 mt-1" >
+    <input type="text" name="job"  placeholder="entrez le job "
+     [value]="newContact.job" 
+     [(ngModel)]="Contact.job" class="w-48 rounded-md p-2 mt-1" > 
+    <select 
+    [(ngModel)]="Contact.idgroupe"
+    name="idgroupe"
+    class="w-48 rounded-md p-2 mt-1 border" >
+        <option *ngFor="let groups of group"  [value]=groups.id >{{groups.name}}</option>
+    </select>
+    
+        <button type="submit" class=" px-3 py-2 bg-indigo-500 w-28 text-center  rounded-md hover:bg-indigo-700 mt-1" >save</button>
+   
+    </div>
+</form>
+<pre>{{newContact|json}}</pre>
+</section>
+<app-footer></app-footer>

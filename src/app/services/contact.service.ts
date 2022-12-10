@@ -6,30 +6,33 @@ import { contact } from '../model/contact';
 @Injectable({
   providedIn: 'root'
 })
-export class ContactService {
-   host="http://localhost:7000/";
+export class ContactService {;
 
   constructor(private http:HttpClient) { }
 //get all Contact 
   getAllContact():Observable<contact>{
-    return this.http.get<contact>(this.host);
+    return this.http.get<contact>("http://localhost:7000/getall");
   }
   //contact by id 
- getContactById(id:any):Observable<contact>
+ getContactById(id:string):Observable<contact>
 {
-return this.http.get<contact>(this.host+id);
+return this.http.get<contact>("http://localhost:7000/getall/"+id);
 }
 //Add new Contact 
-addContact(contact:contact):Observable<void>
+addContact(Contact:contact):Observable<contact>
 {
-return this.http.post<void>(this.host,contact);
+return this.http.post<contact>("http://localhost:7000/add",Contact);
 }
 //delete Contact 
 deleteContact(id:any):Observable<void>{
-  return this.http.delete<void>(this.host+id);
+  return this.http.delete<void>("http://localhost:7000/contact/"+id);
 }
 //Update Contact 
-UpdateContact(contact:contact):Observable<contact>{
-  return this.http.put<contact>(this.host,contact);
+UpdateContact(contact:any,id:string):Observable<contact>{
+  return this.http.put<contact>(`http://localhost:7000/update/${id}`,contact);
+}
+//Get Contact by name 
+getContactByName(Name:string):Observable<contact>{
+return this.http.get<contact>("http://localhost:7000/getbyname"+Name);
 }
 }

@@ -3,6 +3,8 @@ export interface contact{
     name:String;
     phone:String;
     email:String;
+    description:String;
+    job:String
     cover:String;
-    idgroup:Number
+    idgroupe:Number
 }

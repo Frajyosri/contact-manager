@@ -13,6 +13,9 @@ import { RegisterComponent } from './register/register.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {  HttpClientModule } from '@angular/common/http';
+import { AddGroupComponent } from './add-group/add-group.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
@@ -25,7 +28,9 @@ import {  HttpClientModule } from '@angular/common/http';
     FooterComponent,
     NotFoundComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+   EditcontactComponent,
+    AddGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -33,8 +38,11 @@ import {  HttpClientModule } from '@angular/common/http';
     MatSliderModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
-    
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule
+  
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

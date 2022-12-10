@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RegisterComponent } from './register/register.component';
 
+
 const routes: Routes = [
   {path:"add",component:AddcontactComponent},
   {path:"home",component:HomepageComponent},

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { contact } from '../model/contact';
+import { ContactService } from '../services/contact.service';
+
 
 @Component({
   selector: 'app-navbar',
@@ -7,12 +10,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor(private route:Router) { }
+name!:string
+Contact!:contact
+  constructor(private route:Router,
+    private service:ContactService) { }
 
   ngOnInit(): void {
   }
 logout(){
-  this.route.navigate(['/login'])
+  localStorage.removeItem("token");
+  this.route.navigate(["/login"])
 }
+
 }
